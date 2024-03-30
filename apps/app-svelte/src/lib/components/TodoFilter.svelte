@@ -16,7 +16,10 @@
   let timeoutId: NodeJS.Timeout | undefined = undefined;
 
   const updateTimeout = (callback: () => void) => {
-    withTimeout(timeoutId, callback);
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      callback();
+    }, 500);
   };
 
   $: {

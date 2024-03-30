@@ -28,7 +28,7 @@
   let searchCriteria: SearchCriteria = {
     title: "",
     deadline: "",
-    status: null,
+    status: -1,
   };
 
   const init = async () => {

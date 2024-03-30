@@ -61,7 +61,7 @@ export const filterTodoList = (
     if (searchCriteria.deadline.trim().length > 0) {
       isDeadlineMatch = todo.deadline === searchCriteria.deadline;
     }
-    if (searchCriteria.status !== null) {
+    if (searchCriteria.status >= 0) {
       isStatusMatch = todo.status === searchCriteria.status;
     }
     return isTitleMatch && isDeadlineMatch && isStatusMatch;
@@ -70,7 +70,7 @@ export const filterTodoList = (
 };
 
 export const withTimeout = (
-  timeoutId: NodeJS.Timeout | undefined,
+  timeoutId: NodeJS.Timeout | number | undefined,
   callback: () => void,
 ) => {
   clearTimeout(timeoutId);

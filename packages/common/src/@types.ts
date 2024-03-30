@@ -28,5 +28,5 @@ export type PostTodoRes = {
 export type SearchCriteria = {
   title: string;
   deadline: string;
-  status: number | null;
+  status: number;
 };

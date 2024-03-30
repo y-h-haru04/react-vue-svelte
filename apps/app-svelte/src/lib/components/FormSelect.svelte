@@ -1,4 +1,4 @@
-<script lang="ts" generics="T extends { text: string }, U">
+<script lang="ts" generics="T extends { text: string }">
   export let id: string | null= null;
   export let title: string = '';
   export let value: T;

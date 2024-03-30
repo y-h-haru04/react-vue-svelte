@@ -7,4 +7,4 @@ export const OPTIONS = [
   { id: 3, text: "完了" },
 ];
 
-export const SEARCH_SELECT_OPTIONS = [{ id: null, text: "" }, ...OPTIONS];
+export const SEARCH_SELECT_OPTIONS = [{ id: -1, text: "" }, ...OPTIONS];
