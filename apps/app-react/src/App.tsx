@@ -16,6 +16,7 @@ import TodoTable from "./components/TodoTable";
 import Modal from "./components/Modal";
 import FormSelect from "./components/FormSelect";
 import TodoFilter from "./components/TodoFilter";
+import { flushSync } from "react-dom";
 
 function App() {
   const editTitleRef = useRef<FormInputHandle>(null);
@@ -58,15 +59,15 @@ function App() {
     setEditTitleInput(targetTodo.title);
     setEditDeadlineInput(targetTodo.deadline);
     setOpenEditModal(true);
-    if (statusOptions) {
-      setEditStatusSelect(statusOptions);
-    }
-
-    setTimeout(() => {
-      if (editTitleRef.current) {
-        editTitleRef.current.focus();
+    flushSync(() => {
+      if (statusOptions) {
+        setEditStatusSelect(statusOptions);
       }
     });
+
+    if (editTitleRef.current) {
+      editTitleRef.current.focus();
+    }
   };
 
   const onClickTodoDelete = async (index: number) => {
