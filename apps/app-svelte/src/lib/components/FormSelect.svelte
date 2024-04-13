@@ -2,7 +2,7 @@
   export let id: string | null= null;
   export let title: string = '';
   export let value: T;
-  export let options: T[];
+  export let options: readonly T[];
 </script>
 
 <div class="form-group">

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import { OPTIONS, Status, TABLE_HEADER, type Todo } from "common";
+  import { TABLE_HEADER, type Todo } from "common";
+  import Badge from "./Badge.svelte";
 
   type ClickButtonEvent = MouseEvent & {
     currentTarget: EventTarget & HTMLButtonElement;
@@ -39,15 +40,7 @@
             <td>{row.title}</td>
             <td>{row.deadline}</td>
             <td>
-              {#if row.status === Status.BeforeStart}
-                <div class="badge-before-start">{OPTIONS[0].text}</div>
-              {:else if row.status === Status.Working}
-                <div class="badge-working">{OPTIONS[1].text}</div>
-              {:else if row.status === Status.Hold}
-                <div class="badge-hold">{OPTIONS[2].text}</div>
-              {:else}
-                <div class="badge-completed">{OPTIONS[3].text}</div>
-              {/if}
+              <Badge bind:status={row.status} />
             </td>
             <td>
               <button

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { OPTIONS, Status, TABLE_HEADER, type Todo } from "common";
+import { TABLE_HEADER, type Todo } from "common";
+import Badge from "./Badge.vue";
 
 defineProps<{
   todoList: Todo[];
@@ -38,22 +39,7 @@ const onClickDelete = (e: MouseEvent, index: number) => {
           <td>{{ row.title }}</td>
           <td>{{ row.deadline }}</td>
           <td>
-            <div
-              v-if="row.status === Status.BeforeStart"
-              class="badge-before-start"
-            >
-              {{ OPTIONS[0].text }}
-            </div>
-            <div
-              v-else-if="row.status === Status.Working"
-              class="badge-working"
-            >
-              {{ OPTIONS[1].text }}
-            </div>
-            <div v-else-if="row.status === Status.Hold" class="badge-hold">
-              {{ OPTIONS[2].text }}
-            </div>
-            <div v-else class="badge-completed">{{ OPTIONS[3].text }}</div>
+            <Badge :status="row.status" />
           </td>
           <td>
             <button

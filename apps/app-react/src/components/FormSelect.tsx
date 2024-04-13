@@ -9,7 +9,7 @@ type Props<T extends Option> = {
   id?: string;
   title?: string;
   value: T;
-  options: T[];
+  options: readonly T[];
   onChange: (option: T) => void;
 };
 

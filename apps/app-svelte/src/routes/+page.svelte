@@ -21,7 +21,7 @@
   let deadlineInput = "";
   let editTitleInput = "";
   let editDeadlineInput = "";
-  let editStatusSelect = OPTIONS[0];
+  let editStatusSelect: (typeof OPTIONS)[number] = OPTIONS[0];
   let todoList: Todo[] = [];
   let editTodo: Todo | null = null;
   let openEditModal: boolean = false;
@@ -188,6 +188,6 @@
           </div>
         </Modal>
       </div>
-    {:else}<span></span>{/if}
+    {/if}
   </main>
 </div>

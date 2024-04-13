@@ -1,25 +1,6 @@
-import { OPTIONS, Status, TABLE_HEADER, Todo } from "common";
-import { MouseEvent, useMemo } from "react";
-
-type StatusBadgeProps = {
-  todo: Todo;
-};
-
-const StatusBadge = ({ todo }: StatusBadgeProps) => {
-  const [className, text] = useMemo<[string, string]>(() => {
-    switch (todo.status) {
-      case Status.BeforeStart:
-        return ["badge-before-start", OPTIONS[0].text];
-      case Status.Working:
-        return ["badge-working", OPTIONS[1].text];
-      case Status.Hold:
-        return ["badge-hold", OPTIONS[2].text];
-      default:
-        return ["badge-completed", OPTIONS[3].text];
-    }
-  }, [todo.status]);
-  return <div className={className}>{text}</div>;
-};
+import { TABLE_HEADER, Todo } from "common";
+import { MouseEvent } from "react";
+import Badge from "./Badge";
 
 type Props = {
   todoList: Todo[];
@@ -55,7 +36,7 @@ const TodoTable = ({ todoList, onClickRow, onClickDelete }: Props) => {
                   <td>{row.title}</td>
                   <td>{row.deadline}</td>
                   <td>
-                    <StatusBadge todo={row} />
+                    <Badge status={row.status} />
                   </td>
                   <td>
                     <button

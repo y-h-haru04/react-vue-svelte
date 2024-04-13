@@ -5,6 +5,6 @@ export const OPTIONS = [
   { id: 1, text: "着手中" },
   { id: 2, text: "保留" },
   { id: 3, text: "完了" },
-];
+] as const;
 
 export const SEARCH_SELECT_OPTIONS = [{ id: -1, text: "" }, ...OPTIONS];

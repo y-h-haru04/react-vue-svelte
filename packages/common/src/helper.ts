@@ -5,6 +5,8 @@ import type {
   Todo,
   TodoInput,
 } from "./@types";
+import { Status } from "./@types";
+import { OPTIONS } from "./constants";
 
 const API_BASE_URL = "http://localhost:8000/todos";
 
@@ -77,4 +79,17 @@ export const withTimeout = (
   timeoutId = setTimeout(() => {
     callback();
   }, 500);
+};
+
+export const resolveBadge = (status: Status): [string, string] => {
+  switch (status) {
+    case Status.BeforeStart:
+      return ["badge-before-start", OPTIONS[0].text];
+    case Status.Working:
+      return ["badge-working", OPTIONS[1].text];
+    case Status.Hold:
+      return ["badge-hold", OPTIONS[2].text];
+    default:
+      return ["badge-completed", OPTIONS[3].text];
+  }
 };
