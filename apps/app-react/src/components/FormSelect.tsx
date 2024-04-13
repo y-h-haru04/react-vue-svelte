@@ -36,13 +36,6 @@ const FormSelect = <T extends Option>({
           {title}
         </label>
       )}
-      {/* NOTE: svelteとは違いこういう割り当て方はできない */}
-      {/* <select id={id} className="form-input" value={value}>
-        {options.map((option: T) => (
-          <option value={option}>{option.text}</option>
-        ))}
-      </select> */}
-      {/* TODO: null扱えないらしい */}
       <select
         id={id}
         className="form-input"
