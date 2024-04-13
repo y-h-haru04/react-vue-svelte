@@ -10,8 +10,13 @@ const uniqid = () => {
 };
 
 const getJsonData = async () => {
-  const content = await fs.readFile(DATA_PATH, "utf-8");
-  return JSON.parse(content);
+  try {
+    const content = await fs.readFile(DATA_PATH, "utf-8");
+    return JSON.parse(content);
+  } catch (e) {
+    await fs.writeFile(DATA_PATH, JSON.stringify([]));
+    return [];
+  }
 };
 
 const putJsonData = async data => {
