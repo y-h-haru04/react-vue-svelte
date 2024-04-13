@@ -36,19 +36,19 @@ const getAllTodo = handleAsync(async (_, res) => {
 
 const updateSingleTodo = handleAsync(async (req, res) => {
   const id = req.params.id;
-  const _newData = req.body;
+  const newData = req.body;
   const content = await getJsonData();
   const newContent = content.map(data => {
     if (data.id === id) {
       return {
         ...data,
-        ..._newData,
+        ...newData,
       };
     }
     return data;
   });
   await putJsonData(newContent);
-  res.json({ msg: req.params.id });
+  res.json({ data: newData });
 });
 
 const addTodo = handleAsync(async (req, res) => {
