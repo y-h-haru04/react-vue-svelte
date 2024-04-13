@@ -36,3 +36,7 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Build files
+.svelte-kit
+/apps/api/src/data.json
