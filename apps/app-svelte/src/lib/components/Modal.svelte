@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher, onDestroy } from "svelte";
+  import { onDestroy } from "svelte";
 
   export let title: string;
   export let onDestroyModal: (() => void) | null = null;

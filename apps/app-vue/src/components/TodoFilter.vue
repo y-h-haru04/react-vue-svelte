@@ -28,7 +28,7 @@ watch(inputs, (newValue: ReactiveInputs) => {
       ...newValue,
       status: newValue.selectedStatus.id,
     });
-  }, 300);
+  }, 500);
 });
 </script>
 

@@ -2,11 +2,7 @@
   import { createEventDispatcher } from "svelte";
   import FormSelect from "$lib/components/FormSelect.svelte";
   import FormInput from "$lib/components/FormInput.svelte";
-  import {
-    SEARCH_SELECT_OPTIONS,
-    withTimeout,
-    type SearchCriteria,
-  } from "common";
+  import { SEARCH_SELECT_OPTIONS, type SearchCriteria } from "common";
 
   const dispatch = createEventDispatcher<{ criteriaChange: SearchCriteria }>();
 
