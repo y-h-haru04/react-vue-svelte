@@ -74,27 +74,38 @@ function App() {
     if (targetTodo) {
       const deleteId = targetTodo.id;
       await deleteTodo(deleteId);
-      init();
+      setTodoList((prev: Todo[]) => {
+        return prev.filter((todo: Todo) => {
+          return todo.id !== deleteId;
+        });
+      });
     }
   };
 
   const onClickAdd = async () => {
-    await postTodo({
+    const result = await postTodo({
       title: titleInput,
       deadline: deadlineInput,
     });
-    init();
+    setTodoList((prev: Todo[]) => [...prev, result.data]);
   };
 
   const onClickUpdateModal = async () => {
     if (editTodo) {
-      await updateTodo({
+      const result = await updateTodo({
         ...editTodo,
         deadline: editDeadlineInput,
         title: editTitleInput,
         status: editStatusSelect.id,
       });
-      await init();
+      setTodoList((prev: Todo[]) => {
+        return prev.map((todo: Todo) => {
+          if (todo.id === result.data.id) {
+            return result.data;
+          }
+          return todo;
+        });
+      });
     }
     setOpenEditModal(false);
   };

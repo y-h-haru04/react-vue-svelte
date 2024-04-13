@@ -31,11 +31,15 @@
     status: -1,
   };
 
+  const initInput = () => {
+    titleInput = "";
+    deadlineInput = "";
+  };
+
   const init = async () => {
     const res = await getTodoList();
     todoList = res.data;
-    titleInput = "";
-    deadlineInput = "";
+    initInput();
   };
 
   const onDestroyModal = () => {
@@ -71,27 +75,33 @@
     if (targetTodo) {
       const deleteId = targetTodo.id;
       await deleteTodo(deleteId);
-      init();
+      todoList.splice(index, 1);
+      todoList = todoList;
     }
   };
 
   const onClickAdd = async () => {
-    await postTodo({
+    const result = await postTodo({
       title: titleInput,
       deadline: deadlineInput,
     });
-    init();
+    todoList.push(result.data);
+    todoList = todoList;
+    initInput();
   };
 
   const onClickUpdateModal = async () => {
-    if (editTodo) {
-      await updateTodo({
+    if (editTodo !== null) {
+      const result = await updateTodo({
         ...editTodo,
         deadline: editDeadlineInput,
         title: editTitleInput,
         status: editStatusSelect.id,
       });
-      await init();
+      const targetId = editTodo.id;
+      const updateAt = todoList.findIndex((todo: Todo) => todo.id === targetId);
+      todoList.splice(updateAt, 1, result.data);
+      todoList = todoList;
     }
     openEditModal = false;
   };

@@ -32,11 +32,15 @@ const searchCriteria = ref<SearchCriteria>({
   status: -1,
 });
 
+const initInput = () => {
+  titleInput.value = "";
+  deadlineInput.value = "";
+};
+
 const init = async () => {
   const res = await getTodoList();
   todoList.value = res.data;
-  titleInput.value = "";
-  deadlineInput.value = "";
+  initInput();
 };
 
 const onDestroyModal = () => {
@@ -70,27 +74,33 @@ const onClickTodoDelete = async (index: number) => {
   if (targetTodo) {
     const deleteId = targetTodo.id;
     await deleteTodo(deleteId);
-    init();
+    todoList.value.splice(index, 1);
   }
 };
 
 const onClickAdd = async () => {
-  await postTodo({
+  const result = await postTodo({
     title: titleInput.value,
     deadline: deadlineInput.value,
   });
-  init();
+  todoList.value.push(result.data);
+  initInput();
 };
 
 const onClickUpdateModal = async () => {
-  if (editTodo.value) {
-    await updateTodo({
-      ...editTodo.value,
+  const targetTodo = editTodo.value;
+  if (targetTodo) {
+    const result = await updateTodo({
+      ...targetTodo,
       deadline: editDeadlineInput.value,
       title: editTitleInput.value,
       status: editStatusSelect.value.id,
     });
-    await init();
+    const targetId = targetTodo.id;
+    const updateAt = todoList.value.findIndex(
+      (todo: Todo) => todo.id === targetId,
+    );
+    todoList.value.splice(updateAt, 1, result.data);
   }
   openEditModal.value = false;
 };
