@@ -7,13 +7,11 @@ type Props = {
 };
 
 const Modal = ({ title, children: [body, footer], onDestroyModal }: Props) => {
-  // FIXME:
-  // useEffect(() => {
-  //   console.log("### mounted");
-  //   return () => {
-  //     onDestroyModal?.();
-  //   };
-  // }, []);
+  useEffect(() => {
+    return () => {
+      onDestroyModal?.();
+    };
+  }, []);
 
   return (
     <div className="modal">
